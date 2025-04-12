@@ -1,4 +1,7 @@
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import (
+    Qt,
+    QMargins
+)
 from PyQt5.QtWidgets import (
     QApplication,
     QVBoxLayout,
@@ -14,7 +17,7 @@ class StylizingWindow(QWidget):
     def __init__(self):
         super().__init__()
 
-        self.setGeometry(0, 0, 640, 480)
+        self.setGeometry(0, 0, 640, 360)
         self.setWindowTitle("Font Size and Color Adjuster")
 
         self.__setup_components()
@@ -58,7 +61,8 @@ class StylizingWindow(QWidget):
 
     def __setup_layout(self):
         root_layout = QVBoxLayout()
-        root_layout.setSpacing(25)
+        root_layout.setContentsMargins(QMargins(32, 32, 32, 32))
+        root_layout.setSpacing(12)
 
         frame_box_layout = QVBoxLayout()
         frame_box_layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
@@ -77,10 +81,11 @@ class StylizingWindow(QWidget):
         font_color_layout.addWidget(QLabel("Font Color"))
         font_color_layout.addWidget(self.__font_color_slider)
 
-        root_layout.addWidget(self.__frame_box)
-        root_layout.addLayout(font_size_layout)
-        root_layout.addLayout(background_color_layout)
-        root_layout.addLayout(font_color_layout)
+        root_layout.addWidget(QLabel("Dzakanov Inshoofi"), 0)
+        root_layout.addWidget(self.__frame_box, 7)
+        root_layout.addLayout(font_size_layout, 1)
+        root_layout.addLayout(background_color_layout, 1)
+        root_layout.addLayout(font_color_layout, 1)
 
         self.setLayout(root_layout)
 
